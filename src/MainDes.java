@@ -4,6 +4,9 @@ public class MainDes {
 
     private int[] tableauFaceVisible = new int[nbreDes];
 
+    /**
+     * Construit l'objet MainDes
+     */
     public MainDes() {}
 
     public int getNbreFace() {

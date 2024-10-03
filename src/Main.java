@@ -4,11 +4,6 @@ import java.util.Scanner;
 
 public class Main {
 
-        private static final int POINT_YAMS = 50;
-        private static final int POINT_FULL = 25;
-        private static final int POINT_GRANDE_SUITE = 40;
-        private static final int POINT_PETITE_SUITE = 30;
-
         /**
          * Fontion permettant d'afficher les dés
          * @param tableauDes tableau de int contenant les résultats des dés
@@ -83,7 +78,9 @@ public class Main {
         MainDes mainDes = new MainDes();
         CombinaisonDes combinaisonDes = new CombinaisonDes(mainDes);
         ResultatCombinaison resultatCombinaison = new ResultatCombinaison(combinaisonDes, mainDes);
+
         boolean[] tableauCombinaison = new boolean[7];
+
         int totalPoint = 0;
 
         for (int compteur2 = 0; compteur2 < 5; compteur2++) {

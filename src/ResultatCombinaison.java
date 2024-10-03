@@ -14,6 +14,11 @@ public class ResultatCombinaison {
 
     private boolean[] tableauCombinaison = new boolean[NBRE_COMBINAISON];
 
+    /**
+     * Construit un objet ResultatCombinaison
+     * @param combinaisonDes les combinaisons de dés possible
+     * @param mainDes objet mainDes
+     */
     public ResultatCombinaison(CombinaisonDes combinaisonDes, MainDes mainDes) {
         this.combinaisonDes = combinaisonDes;
         this.mainDes = mainDes;
@@ -31,6 +36,10 @@ public class ResultatCombinaison {
         return total;
     }
 
+    /**
+     * Fonction permettant de calculer les combinaisons
+     * @return le total des points
+     */
     public int combinaisonResultat() {
 
         int total = 0;
