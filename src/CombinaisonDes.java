@@ -2,11 +2,11 @@ import java.util.Arrays;
 
 public class CombinaisonDes {
 
+    private MainDes mainDes = new MainDes();
+
     public CombinaisonDes(MainDes mainDes) {
         this.mainDes = mainDes;
     }
-
-    private MainDes mainDes = new MainDes();
 
     /**
      * Fonction permettant de connaître le nombre de dés identiques

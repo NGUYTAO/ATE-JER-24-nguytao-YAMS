@@ -2,71 +2,72 @@ import java.util.Arrays;
 
 public class ResultatCombinaison {
 
-    private int pointYams = 50;
-    private int pointFull = 25;
-    private int pointGrandeSuite = 40;
-    private int pointPetiteSuite = 30;
+    private static final int POINT_YAMS = 50;
+    private static final int POINT_FULL = 25;
+    private static final int POINT_GRANDE_SUITE = 40;
+    private static final int POINT_PETITE_SUITE = 30;
+    private static final int NBRE_COMBINAISON = 7;
 
-    private CombinaisonDes combinaisonDes = new CombinaisonDes();
+    private MainDes mainDes = new MainDes();
 
-    public int getPointYams() {
-        return pointYams;
-    }
+    private CombinaisonDes combinaisonDes = new CombinaisonDes(mainDes);
 
-    public int getPointFull() {
-        return pointFull;
-    }
+    private boolean[] tableauCombinaison = new boolean[NBRE_COMBINAISON];
 
-    public int getPointGrandeSuite() {
-        return pointGrandeSuite;
-    }
-
-    public int getPointPetiteSuite() {
-        return pointPetiteSuite;
+    public ResultatCombinaison(CombinaisonDes combinaisonDes, MainDes mainDes) {
+        this.combinaisonDes = combinaisonDes;
+        this.mainDes = mainDes;
     }
 
     /**
-     * Fonction permettant de savoir la combinaison
-     * @param tableauCombinaison tableau de bool
-     * @param tableauDes tableau de int contenant les résultats des dés
+     * Fonction permettant de calculer le total des 5 dés
+     * @return le total des 5 dés
      */
-    public static int combinaisonResultat(boolean[] tableauCombinaison, int[] tableauDes) {
+    public int totalDes() {
+        int total = 0;
+        for (int compteur = 0; compteur < mainDes.getTableauFaceVisible().length; compteur++) {
+            total += mainDes.getTableauFaceVisible()[compteur];
+        }
+        return total;
+    }
+
+    public int combinaisonResultat() {
 
         int total = 0;
 
-        if (estYams(tableauDes) && !tableauCombinaison[0]) {
+        if (combinaisonDes.estYams() && !tableauCombinaison[0]) {
             System.out.println("YAMS");
             System.out.println("Point : " + POINT_YAMS);
             total += POINT_YAMS;
             tableauCombinaison[0] = true;
         }
-        else if (estFull(tableauDes) && !tableauCombinaison[1]) {
+        else if (combinaisonDes.estFull() && !tableauCombinaison[1]) {
             System.out.println("FULL");
             System.out.println("Point : " + POINT_FULL);
             total += POINT_FULL;
             tableauCombinaison[1] = true;
         }
-        else if (estCarre(tableauDes) && !tableauCombinaison[2]) {
-            Arrays.sort(tableauDes);
+        else if (combinaisonDes.estCarre() && !tableauCombinaison[2]) {
+            Arrays.sort(mainDes.getTableauFaceVisible());
             System.out.println("CARRE");
-            System.out.println("Point : " + (4 * tableauDes[2]));
-            total += (4 * tableauDes[2]);
+            System.out.println("Point : " + (4 * mainDes.getTableauFaceVisible()[2]));
+            total += (4 * mainDes.getTableauFaceVisible()[2]);
             tableauCombinaison[2] = true;
         }
-        else if (estBrelan(tableauDes) && !tableauCombinaison[3]) {
-            Arrays.sort(tableauDes);
+        else if (combinaisonDes.estBrelan() && !tableauCombinaison[3]) {
+            Arrays.sort(mainDes.getTableauFaceVisible());
             System.out.println("BRELAN");
-            System.out.println("Point : " + (3 * tableauDes[2]));
-            total += (3 * tableauDes[2]);
+            System.out.println("Point : " + (3 * mainDes.getTableauFaceVisible()[2]));
+            total += (3 * mainDes.getTableauFaceVisible()[2]);
             tableauCombinaison[3] = true;
         }
-        else if (estGrandeSuite(tableauDes) && !tableauCombinaison[4]) {
+        else if (combinaisonDes.estGrandeSuite() && !tableauCombinaison[4]) {
             System.out.println("GRANDE SUITE");
             System.out.println("Point : " + POINT_GRANDE_SUITE);
             total += POINT_GRANDE_SUITE;
             tableauCombinaison[4] = true;
         }
-        else if (estPetiteSuite(tableauDes) && !tableauCombinaison[5]) {
+        else if (combinaisonDes.estPetiteSuite() && !tableauCombinaison[5]) {
             System.out.println("PETITE SUITE");
             System.out.println("Point : " + POINT_PETITE_SUITE);
             total += POINT_PETITE_SUITE;
@@ -74,8 +75,8 @@ public class ResultatCombinaison {
         }
         else if (!tableauCombinaison[6]) {
             System.out.println("CHANCE");
-            System.out.println("Point : " + totalDes(tableauDes));
-            total += totalDes(tableauDes);
+            System.out.println("Point : " + totalDes());
+            total += totalDes();
             tableauCombinaison[6] = true;
         }
         else {
